@@ -1,5 +1,6 @@
 package com.tonelope.jobs.lt.photoalbum.commands;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -37,6 +38,9 @@ public class PhotoCommands {
 	}
 
 	private List<String> getResults(List<Photo> photos, boolean v) {
+		if (null == photos || photos.isEmpty()) {
+			return Arrays.asList("No result(s) found.");
+		}
 		Function<Photo, String> fmt = v ? Photo::toString : PhotoCommands::fmtIdAndTitle;
 		return photos.stream().map(fmt).collect(Collectors.toList());
 	}

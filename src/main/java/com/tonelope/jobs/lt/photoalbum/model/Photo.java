@@ -1,6 +1,8 @@
 package com.tonelope.jobs.lt.photoalbum.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * <p>
@@ -10,6 +12,8 @@ import lombok.Data;
  *
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Photo {
 
 	private Long albumId;
