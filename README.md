@@ -3,10 +3,11 @@
 ## About
 Photo Service is a technical showcase for a position I applied for with Lean Techniques.
 
+This application is built on [Spring Shell](https://projects.spring.io/spring-shell/).
+
 ## Development
 Be sure to have the following installed:  
 * Java 8 (or greater)
-* Maven
 * Lombok
 
 ## Building
@@ -14,50 +15,49 @@ Be sure to have the following installed:
 ### Prerequisites
 Be sure to have the following installed:  
 * Java 8 (or greater)
-* Maven
 
 ## Execute a Build
 Run the following command from the project's root directory:
 ```sh
-mvn clean install -DskipTests
+$ ./mvnw clean install -DskipTests
 ```
 
 ## Running the tests
 Run the following command from the project's root directory:
 ```sh
-mvn clean test
+$ ./mvnw clean test
 ```
 
 ## Execution
-After successfully building the project, an executable `.jar` file should be available at `target/photoalbum-0.0.1-SNAPSHOT-jar-with-dependencies.jar` in the project directory.
+After successfully building the project, an executable `.jar` file should be available at `target/photoalbum-0.0.1.jar` in the project directory.
 
 Execute the jar by running:
 ```sh
-java -jar photoalbum-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+java -jar target/photoalbum-0.0.1-SNAPSHOT.jar
 ```
 
 **Usage**
 ```sh
-Usage: photoalbum [albumId]
+$ photo-album> help
+AVAILABLE COMMANDS
 
-	[albumId] - (Optional) A numeric value to specify which photos (by album id) should be retrieved. 
+Built-In Commands
+        clear: Clear the shell screen.
+        exit, quit: Exit the shell.
+        help: Display help about available commands.
+        history: Display or save the history of previously run commands
+        script: Read and execute commands from a file.
+        stacktrace: Display the full stacktrace of the last error.
+
+Photo Commands
+        get: Retrieve all photo metadata from the system.
+        get-by-album-id: Retrieve all photo metadata from the system.
 ```
-
-**Examples**
 ```sh
-$ java -jar target/photoalbum-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+$ photo-album> get
 
-[1] accusamus beatae ad facilis cum similique qui sunt
-[2] reprehenderit est deserunt velit ipsam
-[3] officia porro iure quia iusto qui ipsa ut modi
 ...
-```
-
-```sh
-$ java -jar target/photoalbum-0.0.1-SNAPSHOT-jar-with-dependencies.jar 3
-
-[101] incidunt alias vel enim
-[102] eaque iste corporis tempora vero distinctio consequuntur nisi nesciunt
-[103] et eius nisi in ut reprehenderit labore eum
-...
+[4998] qui quo cumque distinctio aut voluptas
+[4999] in voluptate sit officia non nesciunt quis
+[5000] error quasi sunt cupiditate voluptate ea odit beatae
 ```

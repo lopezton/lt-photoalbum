@@ -32,7 +32,6 @@ public class JsonPlaceholderPhotoServiceTest {
 		this.testee = new JsonPlaceholderPhotoService(this.objectMapper);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Test
 	public void testGetAllPhotos() throws IOException {
 		List<Photo> expected = new ArrayList<>();
@@ -46,7 +45,6 @@ public class JsonPlaceholderPhotoServiceTest {
 		assertThat(urlCaptor.getValue().toString()).isEqualTo("https://jsonplaceholder.typicode.com/photos");
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Test
 	public void testGetPhotosByAlbumId() throws IOException {
 		List<Photo> expected = new ArrayList<>();
@@ -59,15 +57,13 @@ public class JsonPlaceholderPhotoServiceTest {
 		Mockito.verify(this.objectMapper).readValue(urlCaptor.capture(), Mockito.any(TypeReference.class));
 		assertThat(urlCaptor.getValue().toString()).isEqualTo("https://jsonplaceholder.typicode.com/photos?albumId=3");
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	@Test(expected = ServiceException.class)
 	public void testGetAllPhotosIOException() throws IOException {
 		Mockito.when(this.objectMapper.readValue(Mockito.any(URL.class), Mockito.any(TypeReference.class))).thenThrow(new IOException());
 		this.testee.getAllPhotos();
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Test(expected = ServiceException.class)
 	public void testGetPhotosByAlbumIdIOException() throws IOException {
 		Mockito.when(this.objectMapper.readValue(Mockito.any(URL.class), Mockito.any(TypeReference.class))).thenThrow(new IOException());

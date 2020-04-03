@@ -1,11 +1,13 @@
 package com.tonelope.jobs.lt.photoalbum;
 
-import java.util.List;
+import org.jline.utils.AttributedString;
+import org.jline.utils.AttributedStyle;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.shell.jline.PromptProvider;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tonelope.jobs.lt.photoalbum.model.Photo;
-import com.tonelope.jobs.lt.photoalbum.service.JsonPlaceholderPhotoService;
-import com.tonelope.jobs.lt.photoalbum.service.PhotoService;
 
 /**
  * <p>
@@ -17,35 +19,20 @@ import com.tonelope.jobs.lt.photoalbum.service.PhotoService;
  * @author Tony Lopez
  *
  */
+@SpringBootApplication
 public class PhotoAlbumApplication {
 
-	public static void main(String[] args) {
-		ObjectMapper om = new ObjectMapper();
-		PhotoService photoService = new JsonPlaceholderPhotoService(om);
-		
-		// retrieve the photos
-		List<Photo> photos;
-		if (args.length > 0) {
-			Long albumId = null;
-			try {
-				albumId = Long.valueOf(args[0]);
-			} catch (NumberFormatException e) {
-				throw new IllegalArgumentException("Please provide a numeric value for albumId.");
-			}
-			photos = photoService.getPhotosByAlbumId(albumId);
-		} else {
-			photos = photoService.getAllPhotos();
-		}
-		
-		// display the photos found
-		if (null != photos && !photos.isEmpty()) {
-			photos.forEach(PhotoAlbumApplication::printPhotoDetails);
-		} else {
-			System.out.println("No photos found.");
-		}
+	public static void main(String[] args) throws Exception {
+		SpringApplication.run(PhotoAlbumApplication.class, args);
+	}
+
+	@Bean
+	public PromptProvider myPromptProvider() {
+		return () -> new AttributedString("photo-album:>", AttributedStyle.DEFAULT.foreground(AttributedStyle.YELLOW));
 	}
 	
-	public static void printPhotoDetails(Photo p) {
-		System.out.println("[" + p.getId() + "] " + p.getTitle());
+	@Bean
+	public ObjectMapper objectMapper() {
+		return new ObjectMapper();
 	}
 }

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tonelope.jobs.lt.photoalbum.model.Photo;
@@ -23,6 +25,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @RequiredArgsConstructor
+@Service
 public class JsonPlaceholderPhotoService implements PhotoService {
 
 	public static String API_URL = "https://jsonplaceholder.typicode.com";
