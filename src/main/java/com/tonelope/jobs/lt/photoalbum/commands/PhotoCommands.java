@@ -1,51 +1,45 @@
 package com.tonelope.jobs.lt.photoalbum.commands;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.shell.standard.ShellComponent;
-import org.springframework.shell.standard.ShellMethod;
-import org.springframework.shell.standard.ShellOption;
-
 import com.tonelope.jobs.lt.photoalbum.model.Photo;
 import com.tonelope.jobs.lt.photoalbum.service.PhotoService;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-
-@ShellComponent
-@Getter
-@Setter
-@RequiredArgsConstructor
+/**
+ * <p>
+ * Defines all shell commands that utilize the {@link PhotoService}.
+ * 
+ * @author Tony Lopez
+ */
 public class PhotoCommands {
 
-	@Autowired
-	private final PhotoService photoService;
-
-	@ShellMethod("Retrieve all photo metadata from the system.")
-	public List<String> get(@ShellOption(help = "verbose", value = { "-v", "--verbose" }) boolean v) {
-		return getResults(this.photoService.getAllPhotos(), v);
+	private PhotoService photoService;
+	
+	public PhotoCommands(PhotoService photoService) {
+		this.photoService = photoService;
 	}
 
-	@ShellMethod("Retrieve all photo metadata from the system.")
-	public List<String> getByAlbumId(@ShellOption(help = "the album id for which to retrieve photos for.") Long albumId,
-			@ShellOption(help = "verbose", value = { "-v", "--verbose" }) boolean v) {
-		return getResults(this.photoService.getPhotosByAlbumId(albumId), v);
+	public List<String> get(boolean verbose) {
+		return getResults(this.photoService.getAllPhotos(), verbose);
 	}
 
-	private List<String> getResults(List<Photo> photos, boolean v) {
+	public List<String> getByAlbumId(Long albumId, boolean verbose) {
+		return getResults(this.photoService.getPhotosByAlbumId(albumId), verbose);
+	}
+
+	private List<String> getResults(List<Photo> photos, boolean verbose) {
 		if (null == photos || photos.isEmpty()) {
-			return Arrays.asList("No result(s) found.");
+			return Collections.singletonList("No result(s) found.");
 		}
-		Function<Photo, String> fmt = v ? Photo::toString : PhotoCommands::fmtIdAndTitle;
-		return photos.stream().map(fmt).collect(Collectors.toList());
-	}
 
-	public static String fmtIdAndTitle(Photo p) {
-		return "[" + p.getId() + "] " + p.getTitle();
+		Function<Photo, String> fmt = Photo::toString;
+		if (!verbose) {
+			fmt = p -> "[" + p.getId() + "] " + p.getTitle();
+		}
+
+		return photos.stream().map(fmt).collect(Collectors.toList());
 	}
 }
