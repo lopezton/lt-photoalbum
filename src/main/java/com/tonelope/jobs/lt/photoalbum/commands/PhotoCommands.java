@@ -16,6 +16,15 @@ import com.tonelope.jobs.lt.photoalbum.service.PhotoService;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+/**
+ * <p>
+ * Defines all spring shell commands that utilize the {@link PhotoService}. See
+ * <a href=
+ * "https://docs.spring.io/spring-shell/docs/current/reference/htmlsingle/#_writing_your_own_commands">this
+ * link</a> for more information about writing commands.
+ * 
+ * @author Tony Lopez
+ */
 @ShellComponent
 @Setter
 @RequiredArgsConstructor
@@ -39,12 +48,12 @@ public class PhotoCommands {
 		if (null == photos || photos.isEmpty()) {
 			return Collections.singletonList("No result(s) found.");
 		}
-		
+
 		Function<Photo, String> fmt = Photo::toString;
 		if (!verbose) {
 			fmt = p -> "[" + p.getId() + "] " + p.getTitle();
 		}
-		
+
 		return photos.stream().map(fmt).collect(Collectors.toList());
 	}
 }

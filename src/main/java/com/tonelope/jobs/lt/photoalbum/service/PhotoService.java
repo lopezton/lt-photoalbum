@@ -26,8 +26,8 @@ import lombok.Setter;
 @Service
 public class PhotoService {
 
-	public static String API_URL = "https://jsonplaceholder.typicode.com";
-	public static String PHOTOS_ENDPOINT = API_URL + "/photos";
+	public static final String API_URL = "https://jsonplaceholder.typicode.com";
+	public static final String PHOTOS_ENDPOINT = API_URL + "/photos";
 
 	private final ObjectMapper objectMapper;
 

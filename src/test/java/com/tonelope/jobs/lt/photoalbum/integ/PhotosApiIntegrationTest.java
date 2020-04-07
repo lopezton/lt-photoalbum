@@ -13,7 +13,8 @@ import com.tonelope.jobs.lt.photoalbum.model.Photo;
 import com.tonelope.jobs.lt.photoalbum.service.PhotoService;
 
 /**
- * Integration test for Photos API
+ * Integration test for Photos API. Makes real calls to the services under test
+ * to validate they are working as expected.
  * 
  * @author Tony Lopez
  *
@@ -21,7 +22,7 @@ import com.tonelope.jobs.lt.photoalbum.service.PhotoService;
 public class PhotosApiIntegrationTest {
 
 	private PhotoService photoService;
-	
+
 	@Before
 	public void init() {
 		this.photoService = new PhotoService(new ObjectMapper());
