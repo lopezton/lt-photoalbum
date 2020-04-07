@@ -68,7 +68,7 @@ public class PhotoCommandsTest {
 
 	private List<Photo> getMockPhotos() {
 		List<Photo> photos = new ArrayList<>();
-		photos.add(new Photo(1L, new Long(1L), "Photo 1", "https://foo.bar/images/1.png",
+		photos.add(new Photo(1L, 1L, "Photo 1", "https://foo.bar/images/1.png",
 				"https://foo.bar/images/1/thumb.png"));
 		return photos;
 	}

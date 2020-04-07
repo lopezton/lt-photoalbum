@@ -3,20 +3,19 @@
 ## About
 Photo Service is a technical showcase for a position I applied for with Lean Techniques.
 
-This application is built on [Spring Shell](https://projects.spring.io/spring-shell/).
+The application consumes a restful webservice and displays it's content to the console.
 
 ## Development
 Be sure to have the following installed:
 * Eclipse
   * Feel free to use whichever IDE you'd like. Instructions below will assume you are using Eclipse.
-* Java 8
-* Lombok
+* JDK 13
 
 ## Building
 
 ### Prerequisites
 Be sure to have the following installed:  
-* Java 8
+* JDK 13
 
 ## Execute a Build
 Run the following command from the project's root directory:
@@ -31,35 +30,39 @@ $ ./mvnw clean test
 ```
 
 ## Execution
-After successfully building the project, an executable `.jar` file should be available at `target/photoalbum-0.0.1.jar` in the project directory.
+After successfully building the project, an executable `.jar` file should be available at `target/photo-album.jar` in the project directory.
 
 Execute the jar by running:
 ```sh
-java -jar target/photoalbum-0.0.1-SNAPSHOT.jar
+java -jar target/photo-album.jar
 ```
 
-**Usage**
+**Usage**  
 ```sh
-$ photo-album> help
-AVAILABLE COMMANDS
+Usage: photo-album [ALBUM_ID] [OPTION]...
+Get photo information.
 
-Built-In Commands
-        clear: Clear the shell screen.
-        exit, quit: Exit the shell.
-        help: Display help about available commands.
-        history: Display or save the history of previously run commands
-        script: Read and execute commands from a file.
-        stacktrace: Display the full stacktrace of the last error.
+[ALBUM_ID]
+    An integer value representing which album to retrieve.
 
-Photo Commands
-        get: Retrieve all photo metadata from the system.
-        get-by-album-id: Retrieve all photo metadata from the system.
+[OPTION]
+
+    -v, --verbose               See more content.
 ```
-```sh
-$ photo-album> get
 
+**Examples**  
+```sh
+$ java -jar target/photo-album.jar
 ...
 [4998] qui quo cumque distinctio aut voluptas
 [4999] in voluptate sit officia non nesciunt quis
 [5000] error quasi sunt cupiditate voluptate ea odit beatae
+```
+
+```sh
+$ java -jar target/photo-album.jar 1
+...
+[48] ut esse id
+[49] quasi quae est modi quis quam in impedit
+[50] et inventore quae ut tempore eius voluptatum
 ```

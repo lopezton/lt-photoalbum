@@ -5,42 +5,28 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.shell.standard.ShellComponent;
-import org.springframework.shell.standard.ShellMethod;
-import org.springframework.shell.standard.ShellOption;
-
 import com.tonelope.jobs.lt.photoalbum.model.Photo;
 import com.tonelope.jobs.lt.photoalbum.service.PhotoService;
 
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-
 /**
  * <p>
- * Defines all spring shell commands that utilize the {@link PhotoService}. See
- * <a href=
- * "https://docs.spring.io/spring-shell/docs/current/reference/htmlsingle/#_writing_your_own_commands">this
- * link</a> for more information about writing commands.
+ * Defines all shell commands that utilize the {@link PhotoService}.
  * 
  * @author Tony Lopez
  */
-@ShellComponent
-@Setter
-@RequiredArgsConstructor
 public class PhotoCommands {
 
-	@Autowired
-	private final PhotoService photoService;
+	private PhotoService photoService;
+	
+	public PhotoCommands(PhotoService photoService) {
+		this.photoService = photoService;
+	}
 
-	@ShellMethod("Retrieve all photo metadata from the system.")
-	public List<String> get(@ShellOption(help = "verbose", value = { "-v", "--verbose" }) boolean verbose) {
+	public List<String> get(boolean verbose) {
 		return getResults(this.photoService.getAllPhotos(), verbose);
 	}
 
-	@ShellMethod("Retrieve all photo metadata from the system.")
-	public List<String> getByAlbumId(@ShellOption(help = "the album id for which to retrieve photos for.") Long albumId,
-			@ShellOption(help = "verbose", value = { "-v", "--verbose" }) boolean verbose) {
+	public List<String> getByAlbumId(Long albumId, boolean verbose) {
 		return getResults(this.photoService.getPhotosByAlbumId(albumId), verbose);
 	}
 
