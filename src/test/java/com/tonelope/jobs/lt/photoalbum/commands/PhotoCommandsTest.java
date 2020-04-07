@@ -32,7 +32,7 @@ public class PhotoCommandsTest {
 	
 	@Test
 	public void testVerbose() {
-		Mockito.when(this.photoService.getAllPhotos()).thenReturn(this.getMockPhotos(1));
+		Mockito.when(this.photoService.getAllPhotos()).thenReturn(this.getMockPhotos());
 		List<String> actual = this.testee.get(true);
 		assertThat(actual.toString()).isEqualTo("[Photo(albumId=1, id=1, title=Photo 1, url=https://foo.bar/images/1.png, thumbnailUrl=https://foo.bar/images/1/thumb.png)]");
 	}
@@ -60,13 +60,8 @@ public class PhotoCommandsTest {
 	}
 	
 	private List<Photo> getMockPhotos() {
-		return this.getMockPhotos(1);
-	}
-	private List<Photo> getMockPhotos(int n) {
 		List<Photo> photos = new ArrayList<>();
-		for(int i = 1; i < n + 1; i++) {
-			photos.add(new Photo(1L, new Long(i), "Photo " + i, "https://foo.bar/images/" + i + ".png", "https://foo.bar/images/" + i + "/thumb.png"));
-		}
+		photos.add(new Photo(1L, new Long(1L), "Photo 1", "https://foo.bar/images/1.png", "https://foo.bar/images/1/thumb.png"));
 		return photos;
 	}
 }

@@ -3,18 +3,13 @@ package com.tonelope.jobs.lt.photoalbum.integ;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tonelope.jobs.lt.photoalbum.model.Photo;
-import com.tonelope.jobs.lt.photoalbum.service.JsonPlaceholderPhotoService;
 import com.tonelope.jobs.lt.photoalbum.service.PhotoService;
 
 /**
@@ -29,19 +24,18 @@ public class PhotosApiIntegrationTest {
 	
 	@Before
 	public void init() {
-		this.photoService = new JsonPlaceholderPhotoService(new ObjectMapper());
+		this.photoService = new PhotoService(new ObjectMapper());
 	}
 
 	@Test
-	public void testGetPhotosContract() throws IOException {
+	public void testGetPhotosContract() {
 		List<Photo> photos = this.photoService.getAllPhotos();
 		assertThat(photos).isNotNull();
 		assertThat(photos).isNotEmpty();
 	}
 
 	@Test
-	public void testGetPhotosByAlbumId()
-			throws JsonParseException, JsonMappingException, MalformedURLException, IOException {
+	public void testGetPhotosByAlbumId() {
 		Long albumId = 3L;
 		List<Photo> photos = this.photoService.getPhotosByAlbumId(albumId);
 		assertThat(photos).isNotNull();

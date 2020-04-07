@@ -6,15 +6,17 @@ Photo Service is a technical showcase for a position I applied for with Lean Tec
 This application is built on [Spring Shell](https://projects.spring.io/spring-shell/).
 
 ## Development
-Be sure to have the following installed:  
-* Java 8 (or greater)
+Be sure to have the following installed:
+* Eclipse
+  * Feel free to use whichever IDE you'd like. Instructions below will assume you are using Eclipse.
+* Java 8
 * Lombok
 
 ## Building
 
 ### Prerequisites
 Be sure to have the following installed:  
-* Java 8 (or greater)
+* Java 8
 
 ## Execute a Build
 Run the following command from the project's root directory:
